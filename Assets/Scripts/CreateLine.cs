@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,9 +26,12 @@ public class CreateLine : MonoBehaviour
     void CreateLineFunc(RectTransform cPos1,RectTransform cPos2)
     {
         LineRenderer lineR = gameObject.GetComponent<LineRenderer>();
-        lineR.widthMultiplier = 2f;
+        lineR.widthMultiplier = 7f;
         lineR.positionCount = 2;
-        lineR.SetPosition(0, cPos1.position);
+
+        //add offset
+
+        lineR.SetPosition(0, cPos1.position );
         lineR.SetPosition(1, cPos2.position);
     }
 }
