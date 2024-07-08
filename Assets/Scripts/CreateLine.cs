@@ -12,6 +12,11 @@ public class CreateLine : MonoBehaviour
     [SerializeField] private Sprite circleSprite;
     [SerializeField] private RectTransform CircleContainer;
 
+    //upbotton
+    int index = 0;
+    int listIndex1 = 0;
+    int listIndex2 = 1;
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,14 +50,14 @@ public class CreateLine : MonoBehaviour
             
         }
     }
-    void CreateLineFunc(RectTransform lPos1,RectTransform lPos2)
+    void CreateLineFunc(int inDex,RectTransform lPos1,RectTransform lPos2)
     {
         LineRenderer lineR = gameObject.GetComponent<LineRenderer>();
         lineR.widthMultiplier = 7f;
         lineR.positionCount = lineCount;
 
-        lineR.SetPosition(0, lPos1.position);
-        lineR.SetPosition(1, lPos2.position);
+        lineR.SetPosition(inDex, lPos1.position);
+        lineR.SetPosition(inDex+1, lPos2.position);
     }
     private GameObject CreateCircle(Vector2 cPos)
     {
@@ -69,10 +74,29 @@ public class CreateLine : MonoBehaviour
 
     public void UpBot()
     {
-        lineCount += 2;
-        pos1 = dots[0].GetComponent<RectTransform>();
-        pos2 = dots[1].GetComponent<RectTransform>();
-        CreateLineFunc(pos1, pos2);
+        
+         // condition
+         
+        if (lineCount >=2)
+        {
+            index ++;
+            listIndex1 ++;
+            listIndex2 ++;
+        }
+        if (lineCount == 0)
+        {
+            lineCount = 2;
+        }
+        else
+        {
+            lineCount += 1;
+
+        }
+
+
+        pos1 = dots[listIndex1].GetComponent<RectTransform>();
+        pos2 = dots[listIndex2].GetComponent<RectTransform>();
+        CreateLineFunc(index, pos1, pos2);
 
 
 
