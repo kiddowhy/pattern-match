@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class CreateLine : MonoBehaviour
     [SerializeField] private RectTransform CircleContainer;
 
     //upbotton
-    int index = 0;
+    [SerializeField] private int index = 0;
     int listIndex1 = 0;
     int listIndex2 = 1;
 
@@ -79,7 +80,8 @@ public class CreateLine : MonoBehaviour
          
         if (lineCount >=2)
         {
-            index ++;
+            lineCount += 1;
+            index++;
             listIndex1 ++;
             listIndex2 ++;
         }
@@ -87,18 +89,40 @@ public class CreateLine : MonoBehaviour
         {
             lineCount = 2;
         }
-        else
-        {
-            lineCount += 1;
+        
+        pos1 = dots[listIndex1].GetComponent<RectTransform>();
+        pos2 = dots[listIndex2].GetComponent<RectTransform>();
+        CreateLineFunc(index, pos1, pos2);
 
+    }
+    public void DownButton()
+    {
+        
+        if (lineCount >= 2)
+        {
+            if(lineCount == 2)   // moving it from first to last position
+            {
+                listIndex1 = dots.Count - 1;
+            }
+            else
+            {
+                listIndex1--;
+            }
+            listIndex2--;
+            lineCount += 1;
+            index++;
+            
+        }
+        if (lineCount == 0)
+        {
+            listIndex1 = 0;
+            listIndex2 = dots.Count -1;
+            lineCount = 2;
         }
 
 
         pos1 = dots[listIndex1].GetComponent<RectTransform>();
         pos2 = dots[listIndex2].GetComponent<RectTransform>();
         CreateLineFunc(index, pos1, pos2);
-
-
-
     }
 }
