@@ -73,7 +73,7 @@ public class CreateLine : MonoBehaviour
         return gameObject;
     }
 
-    public void UpBot()
+    public void UpButton()
     {
         
          // condition
@@ -82,7 +82,7 @@ public class CreateLine : MonoBehaviour
         {
             lineCount += 1;
             index++;
-            listIndex1 ++;
+            listIndex1 = listIndex2;
             listIndex2 ++;
         }
         if (lineCount == 0)
@@ -95,19 +95,62 @@ public class CreateLine : MonoBehaviour
         CreateLineFunc(index, pos1, pos2);
 
     }
+    public void RightButton()
+    {
+
+        // condition
+
+        if (lineCount >= 2)
+        {
+            lineCount += 1;
+            index++;
+            listIndex1= listIndex2;
+            listIndex2+=4;
+        }
+        if (lineCount == 0)
+        {
+            lineCount = 2;
+            listIndex2+=3;
+        }
+
+        pos1 = dots[listIndex1].GetComponent<RectTransform>();
+        pos2 = dots[listIndex2].GetComponent<RectTransform>();
+        CreateLineFunc(index, pos1, pos2);
+
+    }
+    public void LefttButton()
+    {
+
+        // condition
+
+        if(lineCount >= 2)
+        {
+            listIndex1 = listIndex2;
+            listIndex2 -=4;
+            lineCount += 1;
+            index++;
+
+        }
+        if (lineCount == 0)
+        {
+            listIndex1 = dots.Count - 1;
+            listIndex2 = listIndex1 - 4;
+            lineCount = 2;
+        }
+
+
+        pos1 = dots[listIndex1].GetComponent<RectTransform>();
+        pos2 = dots[listIndex2].GetComponent<RectTransform>();
+        CreateLineFunc(index, pos1, pos2);
+
+    }
     public void DownButton()
     {
         
         if (lineCount >= 2)
         {
-            if(lineCount == 2)   // moving it from first to last position
-            {
-                listIndex1 = dots.Count - 1;
-            }
-            else
-            {
-                listIndex1--;
-            }
+            
+            listIndex1 = listIndex2;
             listIndex2--;
             lineCount += 1;
             index++;
